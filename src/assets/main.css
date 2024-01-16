@@ -14,3 +14,17 @@ body {
     font-family: 'Christmas Warmth', sans-serif;
     font-size: 24px;
 }
+
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 80px auto;
+    border-radius: 20px;
+    border: 1px solid;
+}
+
+.error {
+    color: #ff3f80;
+    font-size: 14px;
+}
+

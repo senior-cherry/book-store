@@ -8,8 +8,8 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><router-link to="/about">Про нас</router-link></li>
           <li><router-link to="/catalog">Каталог</router-link></li>
-          <li><router-link to="">Новини</router-link></li>
-          <li><router-link to="">Кошик</router-link></li>
+          <li><router-link to="/">Новини</router-link></li>
+          <li><router-link to="/">Кошик</router-link></li>
         </ul>
       </div>
       <span class="btn btn-ghost text-xl logo"><router-link :to="{ name: 'home' }">Serenity Books</router-link></span>
@@ -23,6 +23,7 @@
       </ul>
     </div>
     <div class="navbar-end">
+      <router-link to="/auth"><span style="margin-right: 10px">Вхід/Реєстрація</span></router-link>
         <Themes />
     </div>
   </div>
