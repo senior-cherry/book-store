@@ -26,7 +26,7 @@ export default {
     const router = useRouter();
 
     const authComplete = async () => {
-      await router.push({ name: 'catalog' })
+      await router.push({ name: 'profile' })
     }
 
     return { showLogin, authComplete }
@@ -70,5 +70,4 @@ export default {
   margin: 20px auto;
   cursor: pointer;
 }
-
 </style>

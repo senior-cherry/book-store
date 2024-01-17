@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from "../views/AboutView.vue";
 import CatalogView from "../views/CatalogView.vue";
+import NewsView from "../views/NewsView.vue";
+import BasketView from "../views/BasketView.vue";
 import AuthView from "../views/AuthView";
+import ProfileView from "../views/ProfileView.vue";
 
 const routes = [
   {
@@ -21,9 +24,24 @@ const routes = [
     component: CatalogView
   },
   {
+    path: '/news',
+    name: 'news',
+    component: NewsView
+  },
+  {
+    path: '/basket',
+    name: 'basket',
+    component: BasketView
+  },
+  {
     path: '/auth',
     name: 'auth',
     component: AuthView
+  },
+  {
+    path: '/profile',
+    name: 'profile',
+    component: ProfileView
   }
 ]
 

@@ -6,34 +6,34 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
         </div>
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-          <li><router-link to="/about">Про нас</router-link></li>
-          <li><router-link to="/catalog">Каталог</router-link></li>
-          <li><router-link to="/">Новини</router-link></li>
-          <li><router-link to="/">Кошик</router-link></li>
+          <li><router-link :to="{ name: 'about' }">Про нас</router-link></li>
+          <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
+          <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
+          <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
         </ul>
       </div>
       <span class="btn btn-ghost text-xl logo"><router-link :to="{ name: 'home' }">Serenity Books</router-link></span>
     </div>
     <div class="navbar-center hidden lg:flex">
       <ul class="menu menu-horizontal px-1">
-        <li><router-link to="/about">Про нас</router-link></li>
-        <li><router-link to="/catalog">Каталог</router-link></li>
-        <li><router-link to="">Новини</router-link></li>
-        <li><router-link to="">Кошик</router-link></li>
+        <li><router-link :to="{ name: 'about' }">Про нас</router-link></li>
+        <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
+        <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
+        <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
       </ul>
     </div>
     <div class="navbar-end">
-      <router-link to="/auth"><span style="margin-right: 10px">Вхід/Реєстрація</span></router-link>
+      <router-link :to="{ name: 'profile' }"><span style="margin-right: 10px">Профіль</span></router-link>
         <Themes />
     </div>
   </div>
   <router-view/>
   <footer class="footer footer-center p-10 rounded">
     <nav class="grid grid-flow-col gap-4">
-      <router-link to="/about"><span class="link link-hover">Про нас</span></router-link>
-      <router-link to=""><span class="link link-hover">Каталог</span></router-link>
-      <router-link to=""><span class="link link-hover">Новини</span></router-link>
-      <router-link to=""><span class="link link-hover">Кошик</span></router-link>
+      <router-link :to="{ name: 'about' }"><span class="link link-hover">Про нас</span></router-link>
+      <router-link :to="{ name: 'catalog' }"><span class="link link-hover">Каталог</span></router-link>
+      <router-link :to="{ name: 'news' }"><span class="link link-hover">Новини</span></router-link>
+      <router-link :to="{ name: 'basket' }"><span class="link link-hover">Кошик</span></router-link>
     </nav>
     <nav>
       <div class="grid grid-flow-col gap-4">
