@@ -1,10 +1,13 @@
 <template>
   <nav v-if="user">
     <div>
-      <p>Hello, {{user.user.value.displayName}}</p>
-      <p>Currently logged in as {{user.user.value.email}}</p>
+      <p>Hello, {{user.displayName}}</p>
+      <p>Currently logged in as {{user.email}}</p>
     </div>
     <button class="btn btn-primary" @click="handleLogout">Logout</button>
+  </nav>
+  <nav v-else>
+    <AuthView />
   </nav>
 </template>
 
@@ -12,16 +15,25 @@
 import getUser from "@/composables/getUser";
 import useLogout from "@/composables/useLogout";
 import AuthView from "@/views/AuthView.vue";
+import {useRouter} from "vue-router";
+import {onMounted} from "vue";
 
 export default {
   components: {AuthView},
   setup() {
     const { error, logout } = useLogout();
-    const user = getUser();
+    const { user } = getUser();
+    const router = useRouter();
 
     const handleLogout = async () => {
       await logout();
     }
+
+    onMounted(() => {
+      if (!user) {
+        router.push({ name: 'auth' })
+      }
+    })
 
     return { handleLogout, user, error }
   }

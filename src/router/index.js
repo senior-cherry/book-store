@@ -6,6 +6,7 @@ import NewsView from "../views/NewsView.vue";
 import BasketView from "../views/BasketView.vue";
 import AuthView from "../views/AuthView";
 import ProfileView from "../views/ProfileView.vue";
+import Create from "../views/Create.vue";
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: ProfileView
+  },
+  {
+    path: '/create',
+    name: 'create',
+    component: Create
   }
 ]
 
