@@ -14,7 +14,7 @@
       <label>Мова: </label>
       <input type="text" v-model="language" required>
       <label>Зображення: </label>
-
+      <input type="file" class="file-input file-input-bordered file-input-primary w-full max-w-xs" @change="handleFile" alt="image" required />
       <label>Опис: </label>
       <textarea v-model="description" required></textarea>
       <label>Жанр/Категорія (Натисніть Enter щоб додати): </label>
@@ -31,6 +31,7 @@
 import {ref} from "vue";
 import {useRouter} from "vue-router";
 import {projectFirestore, storage, timestamp} from "@/firebase/config";
+import useCollection from "@/composables/useCollection";
 
 export default {
   setup() {
@@ -40,11 +41,19 @@ export default {
     const price = ref('');
     const inStock = ref(0);
     const language = ref('');
+    const image = ref('');
     const description = ref('');
     const genre = ref('');
     const genres = ref([]);
 
     const router = useRouter();
+
+    const { addDoc, error } = useCollection('books');
+
+    const handleFile = (event) => {
+      image.value = event.target.files[0].name;
+      console.log(event.target.files[0].name)
+    }
 
     const handleKeydown = () => {
       if (!genres.value.includes(genre.value)) {
@@ -62,16 +71,19 @@ export default {
         price: price.value,
         inStock: inStock.value,
         language: language.value,
+        image: image.value,
         description: description.value,
         genres: genres.value,
         createdAt: timestamp()
       }
 
-      await projectFirestore.collection('books').add(book);
-      await router.push({name: 'catalog'})
+      await addDoc(book);
+      if (!error.value) {
+        await router.push({name: 'catalog'})
+      }
     }
 
-    return { title, author, year, price, inStock, language, description, genre, genres, handleSubmit, handleKeydown }
+    return { title, author, year, price, inStock, language, image, description, genre, genres, handleSubmit, handleKeydown, handleFile }
   }
 }
 </script>
