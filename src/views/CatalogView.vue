@@ -1,7 +1,7 @@
 <template>
-  <div class="books">
+  <div class="books" v-if="formattedDocuments">
     <div v-for="doc in formattedDocuments">
-      <div class="card glass w-96 bg-base-100 shadow-xl">
+      <div class="card glass w-96 bg-base-100 shadow-xl" style="max-height: 600px; margin-top: 50px">
         <figure><img :src="doc.image" alt="Shoes" style="width: 384px; height: 320px" /></figure>
         <div class="card-body text-center">
           <h2 class="card-title">{{doc.title}}</h2>
@@ -10,20 +10,25 @@
           <p>Ціна: {{doc.price}}</p>
           <p>Мова: {{doc.language}}</p>
           <div class="card-actions justify-end">
-            <button class="btn btn-primary">Buy Now</button>
+            <button class="btn btn-primary">В кошик</button>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div v-else>
+    <Spinner />
+  </div>
 </template>
 
 <script>
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import { formatDistanceToNow } from "date-fns";
 import getCollection from "@/composables/getCollection";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
+  components: {Spinner},
   setup() {
     const { error, documents } = getCollection('books');
 
