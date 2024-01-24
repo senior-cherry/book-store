@@ -7,6 +7,26 @@ import BasketView from "../views/BasketView.vue";
 import AuthView from "../views/AuthView";
 import ProfileView from "../views/ProfileView.vue";
 import Create from "../views/Create.vue";
+import {projectAuth} from "@/firebase/config";
+
+const requireAuth = (to, from, next) => {
+  let user = projectAuth.currentUser;
+  if (!user) {
+    next({ name: 'auth' })
+  } else {
+    next()
+  }
+}
+
+// const requireNoAuth = (to, from, next) => {
+//   let user = projectAuth.currentUser;
+//   if (user) {
+//     next({ name: 'CatalogView' })
+//   } else {
+//     next()
+//   }
+// }
+
 
 const routes = [
   {
@@ -47,7 +67,8 @@ const routes = [
   {
     path: '/create',
     name: 'create',
-    component: Create
+    component: Create,
+    beforeEnter: requireAuth
   }
 ]
 

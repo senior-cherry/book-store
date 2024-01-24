@@ -6,7 +6,7 @@ const getCollection = (collection) => {
     const error = ref(null);
 
     let collectionRef = projectFirestore.collection(collection)
-        .orderBy('createdAt');
+        .orderBy('createdAt', 'desc');
 
     const unsub = collectionRef.onSnapshot((snap) => {
         let results = []
