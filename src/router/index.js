@@ -8,6 +8,7 @@ import AuthView from "../views/AuthView";
 import ProfileView from "../views/ProfileView.vue";
 import Create from "../views/Create.vue";
 import {projectAuth} from "@/firebase/config";
+import AdminView from "../views/AdminView.vue";
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
@@ -18,15 +19,14 @@ const requireAuth = (to, from, next) => {
   }
 }
 
-// const requireNoAuth = (to, from, next) => {
-//   let user = projectAuth.currentUser;
-//   if (user) {
-//     next({ name: 'CatalogView' })
-//   } else {
-//     next()
-//   }
-// }
-
+const requireAdminRights = (to, from, next) => {
+  let user = projectAuth.currentUser;
+  if (user.isAdmin) {
+    next({ name: 'admin' })
+  } else {
+    next()
+  }
+}
 
 const routes = [
   {
@@ -69,6 +69,12 @@ const routes = [
     name: 'create',
     component: Create,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: AdminView,
+    beforeEnter: requireAdminRights
   }
 ]
 

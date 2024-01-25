@@ -1,11 +1,68 @@
 <template>
-
+  <div class="overflow-x-auto" v-if="user">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Job</th>
+        <th>Favorite Color</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle w-12 h-12">
+                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">Hart Hagerty</div>
+              <div class="text-sm opacity-50">United States</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          Zemlak, Daniel and Leannon
+          <br/>
+          <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
+        </td>
+        <td>Purple</td>
+        <th>
+          <button class="btn btn-ghost btn-xs">details</button>
+        </th>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
+import getUser from "@/composables/getUser";
+import {useRouter} from "vue-router";
+import {onMounted} from "vue";
 
+export default {
+  setup() {
+    const { user } = getUser();
+    const router = useRouter();
+
+    onMounted(() => {
+      if (!user) {
+        router.push({ name: 'auth' });
+      }
+    })
+
+    return { user }
+  }
+}
 </script>
 
 <style>
-
+.table {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
 </style>

@@ -10,6 +10,7 @@
           <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
           <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
           <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
+          <li><router-link :to="{ name: 'admin' }">Адмінпанель</router-link></li>
         </ul>
       </div>
       <span class="btn btn-ghost text-xl logo"><router-link :to="{ name: 'home' }">Serenity Books</router-link></span>
@@ -20,6 +21,7 @@
         <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
         <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
         <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
+        <li><router-link :to="{ name: 'admin' }">Адмінпанель</router-link></li>
       </ul>
     </div>
     <div class="navbar-end">
