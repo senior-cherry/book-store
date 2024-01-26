@@ -1,34 +1,20 @@
 <template>
-  <div id="alert-2" class="flex items-center p-4 mb-4 text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert" v-if="!isError">
-    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ms-3 text-sm font-medium">
-      A simple info alert with an <a href="#" class="font-semibold underline hover:no-underline">example link</a>. Give it a click if you like.
+  <dialog id="alert_modal" class="modal">
+    <div class="modal-box bg-transparent">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div role="alert" class="alert alert-success" v-if="!isError">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>Your purchase has been confirmed!</span>
+      </div>
+      <div role="alert" class="alert alert-error" v-else>
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <span>Error! Task failed successfully.</span>
+      </div>
     </div>
-    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-red-50 text-red-500 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-red-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-2" aria-label="Close">
-      <span class="sr-only">Close</span>
-      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-      </svg>
-    </button>
-  </div>
-  <div id="alert-3" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert" v-else>
-    <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-      <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-    </svg>
-    <span class="sr-only">Info</span>
-    <div class="ms-3 text-sm font-medium">
-      A simple info alert with an <a href="#" class="font-semibold underline hover:no-underline">example link</a>. Give it a click if you like.
-    </div>
-    <button type="button" class="ms-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-3" aria-label="Close">
-      <span class="sr-only">Close</span>
-      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-      </svg>
-    </button>
-  </div>
+  </dialog>
+
   <div class="books" v-if="formattedDocuments">
     <div v-for="doc in formattedDocuments">
       <div class="card glass w-96 bg-base-100 shadow-xl" style="max-height: 600px; margin-top: 50px">
@@ -56,12 +42,13 @@
 </template>
 
 <script>
-import {computed, onMounted, ref} from "vue";
+import {computed, ref} from "vue";
 import {formatDistanceToNow} from "date-fns";
 import getCollection from "@/composables/getCollection";
 import Spinner from "@/components/Spinner.vue";
 import getUser from "@/composables/getUser";
 import addToBasket from "@/composables/addToBasket";
+import updateAmount from "@/composables/updateAmount";
 
 export default {
   components: {Spinner},
@@ -81,12 +68,11 @@ export default {
 
     const handleItem = async (id) => {
       isError.value = await addToBasket(id, user);
+      if (!isError.value) {
+        await updateAmount(id);
+      }
+      document.getElementById('alert_modal').showModal();
     }
-
-    onMounted(() => {
-      document.getElementById('alert-2').style.display = 'none';
-      document.getElementById('alert-3').style.display = 'none';
-    })
 
     return { error, formattedDocuments, user, handleItem, isError }
   }
