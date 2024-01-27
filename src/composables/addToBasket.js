@@ -9,7 +9,7 @@ let isError = ref(false);
 const addToBasket = async (id, user) => {
     const item = {
         customer: user.value.displayName,
-        id: id,
+        itemId: id,
         amount: 1,
         createdAt: timestamp()
     }

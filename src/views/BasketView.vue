@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto" v-if="user">
+  <div class="overflow-x-auto" v-if="user && formattedItems">
     <table class="table">
       <thead>
       <tr>
@@ -10,7 +10,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="item in formattedBooks">
+      <tr v-for="item in formattedItems">
         <td>
           <div class="flex items-center gap-3">
             <div class="avatar">
@@ -25,7 +25,7 @@
           </div>
         </td>
         <td>
-          Zemlak, Daniel and Leannon
+          {{item.amount}}
           <br/>
           <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
         </td>
@@ -37,65 +37,50 @@
       </tbody>
     </table>
   </div>
+  <div v-else>
+    <Spinner />
+  </div>
 </template>
 
 <script>
 import getUser from "@/composables/getUser";
 import {useRouter} from "vue-router";
-import {computed, ref, watchEffect} from "vue";
+import {computed} from "vue";
 import getCollection from "@/composables/getCollection";
 import {formatDistanceToNow} from "date-fns";
-import {projectFirestore} from "@/firebase/config";
 import getBooks from "@/composables/getBooks";
+import Spinner from "@/components/Spinner.vue";
 
 export default {
+  components: {Spinner},
   setup() {
     const { user } = getUser();
     const router = useRouter();
     const { error, documents } = getCollection('basket');
     const { err, books } = getBooks('books');
 
-    const formattedDocuments = computed(() => {
-      if (documents.value) {
-        return documents.value.map(doc => {
-          let time = formatDistanceToNow(doc.createdAt.toDate());
-          return { ...doc, createdAt: time }
-        })
+    const formattedItems = computed(() => {
+      if (!books.value || !documents.value) {
+        return null;
       }
+
+      return books.value.flatMap(book => {
+        const matchingDoc = documents.value.find(doc => book.id === doc.itemId && doc.customer === user.value.displayName);
+
+        if (matchingDoc) {
+          const time = formatDistanceToNow(book.createdAt.toDate());
+          return { ...book, createdAt: time };
+        }
+        return null;
+      }).filter(item => item !== null);
     });
-
-    const formattedBooks = computed(() => {
-      if (books.value) {
-        return books.value.map(book => {
-              let time = formatDistanceToNow(book.createdAt.toDate());
-              return { ...book, createdAt: time }
-          })
-      }
-    });
-
-    const processItems = () => {
-      // Loop through formattedDocuments
-      formattedDocuments.value.forEach(documentItem => {
-        // Your logic for processing each documentItem
-        console.log(documentItem);
-      });
-
-      // Loop through formattedBooks
-      formattedBooks.value.forEach(bookItem => {
-        // Your logic for processing each bookItem
-        console.log(bookItem);
-      });
-    };
-
-    // Call the function when needed
-    processItems();
 
 
     if (!user) {
         router.push({ name: 'auth' });
       }
 
-    return { user, formattedBooks, formattedDocuments }
+    return { user, formattedItems }
   }
 }
 </script>
