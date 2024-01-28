@@ -1,16 +1,16 @@
 import {ref} from "vue";
 
 const useGenres = (books) => {
-    const genres = ref([]);
-    const genreSet = new Set();
+        const genres = ref([]);
+        const genreSet = new Set();
 
-    books.map(book => {
-        book.genres.forEach(genre => genreSet.add(genre));
-    });
+    (books ?? []).forEach(book => {
+                book.genres.forEach(genre => genreSet.add(genre));
+            });
 
-    genres.value = [...genreSet]
+        genres.value = [...genreSet]
 
-    return { genres }
+        return { genres }
 }
 
 export default useGenres;

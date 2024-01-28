@@ -2,7 +2,7 @@
   <div class="genre-cloud">
     <h3>Жанри</h3>
     <div v-for="genre in genres" :key="genre">
-      <router-link :to="{name: 'genre', params: { genre: encodeURIComponent(genre) }}">
+      <router-link :to="{name: 'genre', params: { genre: genre }}">
         {{ genre }}
       </router-link>
     </div>
