@@ -7,6 +7,7 @@ const { addDoc, error } = useCollection('basket');
 let isError = ref(false);
 
 const addToBasket = async (id, user) => {
+
     const item = {
         customer: user.value.displayName,
         itemId: id,

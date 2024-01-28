@@ -1,13 +1,13 @@
 import {projectFirestore} from "@/firebase/config";
 
-const updateAmount = async (id) => {
+const updateAmount = async (id, num) => {
         projectFirestore.collection('books')
             .doc(id)
             .get()
             .then((doc) => {
                 if (doc.exists) {
                     const currentFieldValue = doc.data().inStock;
-                    const newFieldValue = currentFieldValue - 1;
+                    const newFieldValue = currentFieldValue + num
 
                     projectFirestore.collection('books')
                         .doc(id)

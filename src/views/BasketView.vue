@@ -25,9 +25,8 @@
           </div>
         </td>
         <td>
-          {{item.amount}}
           <br/>
-          <span class="badge badge-ghost badge-sm">Desktop Support Technician</span>
+          <span class="badge badge-ghost badge-sm"></span>
         </td>
         <td>Purple</td>
         <th>
@@ -74,7 +73,6 @@ export default {
         return null;
       }).filter(item => item !== null);
     });
-
 
     if (!user) {
         router.push({ name: 'auth' });

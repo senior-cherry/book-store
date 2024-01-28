@@ -14,6 +14,7 @@ const useCollection = (collection) => {
             error.value = "Could not add doc";
         }
     }
+
     return { error, addDoc }
 }
 

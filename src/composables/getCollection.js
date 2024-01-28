@@ -22,7 +22,7 @@ const getCollection = (collection) => {
 
     watchEffect((onInvalidate) => {
         onInvalidate(() => unsub())
-    })
+        })
 
     return { documents, error }
 }
