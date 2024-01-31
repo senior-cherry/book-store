@@ -3,10 +3,13 @@
     <table class="table">
       <thead>
       <tr>
-        <th>Name</th>
-        <th>Job</th>
-        <th>Favorite Color</th>
-        <th></th>
+        <th>Зображення</th>
+        <th>Назва</th>
+        <th>Автор</th>
+        <th>Рік</th>
+        <th>Мова</th>
+        <th>Ціна</th>
+        <th>Дії</th>
       </tr>
       </thead>
       <tbody>
@@ -18,20 +21,26 @@
                 <img :src="item.image" alt="Avatar Tailwind CSS Component" />
               </div>
             </div>
-            <div>
-              <div class="font-bold"></div>
-              <div class="text-sm opacity-50">{{item.title}}</div>
-            </div>
           </div>
         </td>
         <td>
-          <br/>
-          <span class="badge badge-ghost badge-sm"></span>
+          <span>{{item.title}}</span>
         </td>
-        <td>Purple</td>
-        <th>
-          <button class="btn btn-ghost btn-xs">details</button>
-        </th>
+        <td>
+          <span>{{item.author}}</span>
+        </td>
+        <td>
+          <span>{{item.year}}</span>
+        </td>
+        <td>
+          <span>{{item.language}}</span>
+        </td>
+        <td>
+          <span>{{item.price}} UAH</span>
+        </td>
+        <td>
+          <button class="btn btn-error" @click="handleClick(item.id)">Видалити</button>
+        </td>
       </tr>
       </tbody>
     </table>
@@ -49,6 +58,8 @@ import getCollection from "@/composables/getCollection";
 import {formatDistanceToNow} from "date-fns";
 import getBooks from "@/composables/getBooks";
 import Spinner from "@/components/Spinner.vue";
+import {projectFirestore} from "@/firebase/config";
+import updateAmount from "@/composables/updateAmount";
 
 export default {
   components: {Spinner},
@@ -74,11 +85,27 @@ export default {
       }).filter(item => item !== null);
     });
 
+    const handleClick = async (itemId) => {
+      try {
+        const querySnapshot = await projectFirestore.collection('basket')
+            .where("itemId", '==', itemId)
+            .get();
+
+        querySnapshot.forEach(async (doc) => {
+          await projectFirestore.collection("basket").doc(doc.id).delete();
+          await updateAmount(itemId, 1);
+          console.log('Document successfully deleted!');
+        });
+    } catch (error) {
+      console.error('Error deleting document: ', error);
+    }
+    }
+
     if (!user) {
         router.push({ name: 'auth' });
       }
 
-    return { user, formattedItems }
+    return { user, formattedItems, handleClick }
   }
 }
 </script>

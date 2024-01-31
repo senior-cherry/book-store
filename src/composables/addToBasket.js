@@ -10,6 +10,7 @@ const addToBasket = async (id, user) => {
 
     const item = {
         customer: user.value.displayName,
+        userid: user.value.uid,
         itemId: id,
         amount: 1,
         createdAt: timestamp()
