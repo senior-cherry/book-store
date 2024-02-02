@@ -58,8 +58,6 @@ import getCollection from "@/composables/getCollection";
 import {formatDistanceToNow} from "date-fns";
 import getBooks from "@/composables/getBooks";
 import Spinner from "@/components/Spinner.vue";
-import {projectFirestore} from "@/firebase/config";
-import updateAmount from "@/composables/updateAmount";
 import deleteCollection from "@/composables/deleteCollection";
 
 export default {
