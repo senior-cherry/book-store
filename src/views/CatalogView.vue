@@ -15,8 +15,6 @@ import {formatDistanceToNow} from "date-fns";
 import getCollection from "@/composables/getCollection";
 import Spinner from "@/components/Spinner.vue";
 import getUser from "@/composables/getUser";
-import addToBasket from "@/composables/addToBasket";
-import updateAmount from "@/composables/updateAmount";
 import CategoriesView from "@/views/CategoriesView.vue";
 import BooksList from "@/components/BooksList.vue";
 import Modal from "@/components/Modal.vue";
@@ -37,22 +35,7 @@ export default {
       }
     });
 
-    const handleItem = async (id) => {
-      isError.value = await addToBasket(id, user);
-      const btn = document.getElementById(id);
-      if (!isError.value) {
-        if (btn.textContent === "В кошику") {
-          btn.textContent = "В кошик";
-          await updateAmount(id, 1);
-        } else {
-          btn.textContent = "В кошику";
-          await updateAmount(id, -1);
-        }
-      }
-      document.getElementById('alert_modal').showModal();
-    }
-
-    return { error, formattedDocuments, user, handleItem, isError, documents }
+    return { error, formattedDocuments, user, isError, documents }
   }
 }
 
@@ -67,8 +50,4 @@ export default {
   margin: 50px 50px;
 }
 
-.title {
-  font-size: 20px;
-  font-weight: 600;
-}
 </style>

@@ -36,15 +36,8 @@ export default {
 
     const handleItem = async (id) => {
       isError.value = await addToBasket(id, user);
-      const btn = document.getElementById(id);
       if (!isError.value) {
-        if (btn.textContent === "В кошику") {
-          btn.textContent = "В кошик";
-          await updateAmount(id, 1);
-        } else {
-          btn.textContent = "В кошику";
-          await updateAmount(id, -1);
-        }
+        await updateAmount(id, -1);
       }
       document.getElementById('alert_modal').showModal();
     }
@@ -53,3 +46,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.title {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>

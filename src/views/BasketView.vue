@@ -60,6 +60,7 @@ import getBooks from "@/composables/getBooks";
 import Spinner from "@/components/Spinner.vue";
 import {projectFirestore} from "@/firebase/config";
 import updateAmount from "@/composables/updateAmount";
+import deleteCollection from "@/composables/deleteCollection";
 
 export default {
   components: {Spinner},
@@ -86,19 +87,7 @@ export default {
     });
 
     const handleClick = async (itemId) => {
-      try {
-        const querySnapshot = await projectFirestore.collection('basket')
-            .where("itemId", '==', itemId)
-            .get();
-
-        querySnapshot.forEach(async (doc) => {
-          await projectFirestore.collection("basket").doc(doc.id).delete();
-          await updateAmount(itemId, 1);
-          console.log('Document successfully deleted!');
-        });
-    } catch (error) {
-      console.error('Error deleting document: ', error);
-    }
+      await deleteCollection(itemId, "basket");
     }
 
     if (!user) {
