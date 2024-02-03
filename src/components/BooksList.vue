@@ -2,13 +2,15 @@
   <Modal :isError="isError" />
   <div v-for="doc in books">
     <div class="card glass w-96 bg-base-100 shadow-xl" style="max-height: 600px; margin-top: 50px">
-      <figure><img :src="doc.image" alt="Shoes" style="width: 384px; height: 320px" /></figure>
+      <figure><img :src="'/' + doc.image" alt="Shoes" style="width: 384px; height: 320px" /></figure>
       <div class="card-body text-center">
-        <p class="title">{{doc.title}}</p>
+        <router-link :to="{name: 'book', params: { book: doc.id }}">
+          <p class="title">{{doc.title}}</p>
+        </router-link>
         <p>Автор: {{doc.author}}</p>
         <p>Рік: {{doc.year}}</p>
-        <p>Ціна: {{doc.price}}</p>
         <p>Мова: {{doc.language}}</p>
+        <p>{{doc.price}} UAH</p>
         <p><div class="badge badge-success" v-if="doc.inStock > 5">В наявності</div>
           <div class="badge badge-warning" v-else-if="doc.inStock <= 5 && doc.inStock > 0">Закінчується</div>
           <div class="badge badge-error" v-else>Немає в наявності</div></p>

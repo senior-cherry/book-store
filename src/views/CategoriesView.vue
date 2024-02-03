@@ -11,7 +11,9 @@
 
 <script>
 import useGenres from "../composables/useGenres";
+import Spinner from "@/components/Spinner.vue";
 export default {
+  components: {Spinner},
   props: ['books'],
   setup(props) {
     const { genres } = useGenres(props.books);
@@ -27,9 +29,8 @@ export default {
 }
 
 .genre-cloud h3 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid;
   padding: 16px 8px;
-  color: #444;
 }
 
 .genre-cloud div {
@@ -38,12 +39,10 @@ export default {
 }
 
 .genre-cloud a {
-  color: #ccc;
   text-decoration: none;
 }
 
 .genre-cloud a.router-link-active {
   color: #ff8800;
-  font-weight: bold;
 }
 </style>

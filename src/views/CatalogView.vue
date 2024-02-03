@@ -1,8 +1,8 @@
 <template>
   <Modal :isError="isError" />
+  <CategoriesView :books="formattedDocuments" v-if="formattedDocuments" />
   <div class="books" v-if="formattedDocuments">
     <BooksList :books="formattedDocuments" />
-    <CategoriesView :books="formattedDocuments" />
   </div>
   <div v-else>
     <Spinner />
@@ -47,7 +47,6 @@ export default {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 1.5em;
   padding: 2em 0;
-  margin: 50px 50px;
+  margin: 0 50px 50px;
 }
-
 </style>

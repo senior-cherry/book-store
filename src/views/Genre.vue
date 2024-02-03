@@ -1,14 +1,12 @@
 <template>
-  <div class="genre">
     <div v-if="error">{{ error }}</div>
+  <CategoriesView :books="documents" v-if="documents" />
     <div v-if="formattedDocuments !== null" class="layout">
       <BooksList :books="formattedDocuments" />
-      <CategoriesView :books="formattedDocuments" />
     </div>
     <div v-else>
       <Spinner />
     </div>
-  </div>
 </template>
 
 <script>
@@ -38,5 +36,11 @@ export default {
 </script>
 
 <style>
-
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1.5em;
+  padding: 2em 0;
+  margin: 0 50px 50px;
+}
 </style>

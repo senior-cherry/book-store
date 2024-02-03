@@ -9,7 +9,8 @@ import ProfileView from "../views/ProfileView.vue";
 import Create from "../views/Create.vue";
 import {projectAuth} from "@/firebase/config";
 import AdminView from "../views/AdminView.vue";
-import Genre from "@/views/Genre.vue";
+import Genre from "../views/Genre.vue";
+import SingleBook from "../components/SingleBook.vue";
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
@@ -35,6 +36,11 @@ const routes = [
     path: '/catalog',
     name: 'catalog',
     component: CatalogView
+  },
+  {
+    path: '/details/:book',
+    name: 'book',
+    component: SingleBook
   },
   {
     path: '/genres/:genre',
