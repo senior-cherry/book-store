@@ -102,4 +102,8 @@ export default {
   margin-top: 50px;
   margin-bottom: 50px;
 }
+
+.table td .btn {
+  margin-bottom: 28px;
+}
 </style>

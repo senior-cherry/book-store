@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from "../views/AboutView.vue";
 import CatalogView from "../views/CatalogView.vue";
-import NewsView from "../views/NewsView.vue";
+import BlogView from "../views/BlogView.vue";
 import BasketView from "../views/BasketView.vue";
 import AuthView from "../views/AuthView";
 import ProfileView from "../views/ProfileView.vue";
@@ -11,6 +11,7 @@ import {projectAuth} from "@/firebase/config";
 import AdminView from "../views/AdminView.vue";
 import Genre from "../views/Genre.vue";
 import SingleBook from "../components/SingleBook.vue";
+import CreatePost from "../views/CreatePost.vue";
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
@@ -48,14 +49,15 @@ const routes = [
     component: Genre
   },
   {
-    path: '/news',
-    name: 'news',
-    component: NewsView
+    path: '/blog',
+    name: 'blog',
+    component: BlogView
   },
   {
     path: '/basket',
     name: 'basket',
-    component: BasketView
+    component: BasketView,
+    beforeEnter: requireAuth
   },
   {
     path: '/auth',
@@ -71,6 +73,12 @@ const routes = [
     path: '/create',
     name: 'create',
     component: Create,
+    beforeEnter: requireAuth
+  },
+  {
+    path: '/createPost',
+    name: 'createPost',
+    component: CreatePost,
     beforeEnter: requireAuth
   },
   {

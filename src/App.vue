@@ -8,7 +8,7 @@
         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
           <li><router-link :to="{ name: 'about' }">Про нас</router-link></li>
           <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
-          <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
+          <li><router-link :to="{ name: 'blog' }">Блог</router-link></li>
           <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
           <li><router-link :to="{ name: 'admin' }">Адмінпанель</router-link></li>
         </ul>
@@ -19,7 +19,7 @@
       <ul class="menu menu-horizontal px-1">
         <li><router-link :to="{ name: 'about' }">Про нас</router-link></li>
         <li><router-link :to="{ name: 'catalog' }">Каталог</router-link></li>
-        <li><router-link :to="{ name: 'news' }">Новини</router-link></li>
+        <li><router-link :to="{ name: 'blog' }">Блог</router-link></li>
         <li><router-link :to="{ name: 'basket' }">Кошик</router-link></li>
         <li><router-link :to="{ name: 'admin' }">Адмінпанель</router-link></li>
       </ul>
@@ -34,7 +34,7 @@
     <nav class="grid grid-flow-col gap-4">
       <router-link :to="{ name: 'about' }"><span class="link link-hover">Про нас</span></router-link>
       <router-link :to="{ name: 'catalog' }"><span class="link link-hover">Каталог</span></router-link>
-      <router-link :to="{ name: 'news' }"><span class="link link-hover">Новини</span></router-link>
+      <router-link :to="{ name: 'blog' }"><span class="link link-hover">Блог</span></router-link>
       <router-link :to="{ name: 'basket' }"><span class="link link-hover">Кошик</span></router-link>
     </nav>
     <nav>
