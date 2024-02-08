@@ -12,6 +12,7 @@ import AdminView from "../views/AdminView.vue";
 import Genre from "../views/Genre.vue";
 import SingleBook from "../components/SingleBook.vue";
 import CreatePost from "../views/CreatePost.vue";
+import SinglePost from "../components/SinglePost.vue";
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
@@ -52,6 +53,11 @@ const routes = [
     path: '/blog',
     name: 'blog',
     component: BlogView
+  },
+  {
+    path: '/blog/:post',
+    name: 'post',
+    component: SinglePost
   },
   {
     path: '/basket',

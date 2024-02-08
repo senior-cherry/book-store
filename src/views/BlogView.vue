@@ -9,9 +9,11 @@
           <div class="blog-post-date">
             <span>{{doc.createdAt}}</span>
           </div>
-          <h1 class="blog-post-title">
-            {{doc.title}}
-          </h1>
+          <router-link :to="{ name: 'post', params: { post: doc.id } }">
+            <h1 class="blog-post-title">
+              {{doc.title}}
+            </h1>
+          </router-link>
           <p class="blog-post-text">
             {{doc.description}}
           </p>
@@ -39,7 +41,22 @@ export default {
       if (documents.value) {
         return documents.value.map(doc => {
           let time = formatDistanceToNow(doc.createdAt.toDate());
-          return { ...doc, createdAt: time }
+          let desc;
+          let title;
+
+          if (doc.description.length > 30) {
+            desc = doc.description.substring(0, 30) + '....';
+          } else {
+            desc = doc.description;
+          }
+
+          if (doc.title.length > 50) {
+            title = doc.title.substring(0, 50) + '....';
+          } else {
+            title = doc.title;
+          }
+
+          return { ...doc, createdAt: time, description:  desc, title: title}
         })
       }
     });
@@ -127,6 +144,14 @@ img {
     min-width: 30rem;
     max-width: 30rem;
   }
+
+  .blog-post-title {
+    font-size: 1.2rem;
+  }
+
+  .blog-post-text {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 868px) {
@@ -137,6 +162,14 @@ img {
   .blog-post {
     max-width: 70rem;
     margin: 10vh 0 10vh 0;
+  }
+
+  .blog-post-title {
+    font-size: 1.2rem;
+  }
+
+  .blog-post-text {
+    font-size: 1rem;
   }
 }
 
@@ -155,6 +188,14 @@ img {
     min-width: 100%;
     max-width: 100%;
     transform: translate(0, -8rem);
+  }
+
+  .blog-post-title {
+    font-size: 1rem;
+  }
+
+  .blog-post-text {
+    font-size: 0.7rem;
   }
 }
 </style>
