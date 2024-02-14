@@ -1,10 +1,10 @@
 <template>
-  <nav v-if="user">
+  <nav v-if="user" class="profile">
     <div>
-      <p>Hello, {{user.displayName}}</p>
-      <p>Currently logged in as {{user.email}}</p>
+      <p>Привіт, {{user.displayName}}</p>
+      <p>Ви увійшли в систему як {{user.email}}</p>
     </div>
-    <button class="btn btn-primary" @click="handleLogout">Logout</button>
+    <button class="btn btn-primary" @click="handleLogout">Вийти</button>
   </nav>
   <nav v-else>
     <AuthView />
@@ -40,8 +40,8 @@ export default {
 }
 </script>
 
-<style scoped>
-nav {
+<style>
+nav.profile {
   padding: 20px;
   border-bottom: 1px solid;
   display: flex;

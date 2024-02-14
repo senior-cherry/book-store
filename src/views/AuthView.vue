@@ -1,14 +1,14 @@
 <template>
   <div class="welcome container">
     <div v-if="showLogin">
-      <h2>Login</h2>
+      <h2>Увійти</h2>
       <LoginForm @login="authComplete" />
-      <p>No account yet? <span @click="showLogin = false">Signup</span> instead</p>
+      <p>Немає аккаунту? <span @click="showLogin = false">Зареєструватися</span></p>
     </div>
     <div v-else>
-      <h2>Sign up</h2>
+      <h2>Зареєструватися</h2>
       <SignupForm />
-      <p>Already registered? <span @click="showLogin = true">Login</span> instead</p>
+      <p>Вже зареєстровані? <span @click="showLogin = true">Увійти</span></p>
     </div>
   </div>
 </template>
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style>
-.welcome {
+.welcome.container {
   text-align: center;
   padding: 20px 0;
 }
@@ -67,8 +67,8 @@ export default {
 }
 
 .welcome button {
-  margin: 20px 100px;
+  margin: 20px 75px;
   cursor: pointer;
-  width: 100px;
+  width: 150px;
 }
 </style>
