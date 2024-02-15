@@ -2,7 +2,7 @@
   <div id="about" class="container">
     <div class="about-row">
       <div class="left-col">
-        <img src="last-wish.jpg" alt="">
+        <img src="pexels-karolina-grabowska-5427135.jpg" alt="">
       </div>
       <div class="right-col">
         <h1>Наша <span>історія</span></h1>
@@ -22,13 +22,13 @@
           Друзі взяли в аренду невеличке приміщення, створили інтернет-магазин, налагодили систему обслуговування клієнтів.</p>
       </div>
       <div class="right-col">
-        <img src="harry-potter-2007.jpg" alt="">
+        <img src="pexels-ron-lach-8085264.jpg" alt="">
       </div>
     </div>
 
     <div class="about-row">
       <div class="left-col">
-        <img src="harry-potter-2009.jpg" alt="">
+        <img src="pexels-thought-catalog-904616.jpg" alt="">
       </div>
       <div class="right-col">
         <h1>Перші <span>кроки</span></h1>
