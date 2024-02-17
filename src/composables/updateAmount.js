@@ -15,10 +15,10 @@ const updateAmount = async (id, num) => {
                             inStock: newFieldValue,
                         })
                         .then(() => {
-                            console.log('Field value decreased successfully');
+                            console.log('Field value changed successfully');
                         })
                         .catch((error) => {
-                            console.error('Error decreasing field value:', error);
+                            console.error('Error changing field value:', error);
                         });
                 } else {
                     console.error('Document does not exist');
