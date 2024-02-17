@@ -30,7 +30,13 @@ export default {
       if (documents.value) {
         return documents.value.map(doc => {
           let time = formatDistanceToNow(doc.createdAt.toDate());
-          return { ...doc, createdAt: time }
+          let title;
+          if (doc.title.length > 20) {
+            title = doc.title.substring(0, 20) + '....';
+          } else {
+            title = doc.title;
+          }
+          return { ...doc, createdAt: time, title: title }
         })
       }
     });
