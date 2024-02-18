@@ -1,5 +1,4 @@
 <template>
-  <Modal :isError="isError" />
   <CategoriesView :books="formattedDocuments" v-if="formattedDocuments" />
   <div class="books" v-if="formattedDocuments">
     <BooksList :books="formattedDocuments" />
@@ -24,24 +23,32 @@ export default {
   setup() {
     const { error, documents } = getCollection('books');
     const { user } = getUser();
-    const isError = ref(false);
 
     const formattedDocuments = computed(() => {
       if (documents.value) {
         return documents.value.map(doc => {
           let time = formatDistanceToNow(doc.createdAt.toDate());
           let title;
+          let author;
+
           if (doc.title.length > 20) {
             title = doc.title.substring(0, 20) + '....';
           } else {
             title = doc.title;
           }
-          return { ...doc, createdAt: time, title: title }
+
+          if (doc.author.length > 20) {
+            author = doc.author.substring(0, 20) + '....';
+          } else {
+            author = doc.author;
+          }
+
+          return { ...doc, createdAt: time, title: title, author: author }
         })
       }
     });
 
-    return { error, formattedDocuments, user, isError, documents }
+    return { error, formattedDocuments, user, documents }
   }
 }
 

@@ -13,6 +13,7 @@ import Genre from "../views/Genre.vue";
 import SingleBook from "../components/SingleBook.vue";
 import CreatePost from "../views/CreatePost.vue";
 import SinglePost from "../components/SinglePost.vue";
+import NotFound from "../components/NotFound";
 
 const requireAuth = (to, from, next) => {
   let user = projectAuth.currentUser;
@@ -92,6 +93,10 @@ const routes = [
     name: 'admin',
     component: AdminView,
     beforeEnter: requireAuth
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFound
   }
 ]
 

@@ -37,10 +37,16 @@ export default {
     const isError = ref(false);
 
     const handleItem = async (id) => {
-      isError.value = await addToBasket(id, user);
-      if (!isError.value) {
-        await updateAmount(id, -1);
+      if (localStorage.getItem("item" + id.toString() + user.toString()) === null) {
+        isError.value = await addToBasket(id, user);
+        localStorage.setItem("item" + id.toString() + user.toString(), '1');
+        if (!isError.value) {
+          await updateAmount(id, -1);
+        }
+      } else {
+        isError.value = true;
       }
+
       document.getElementById('alert_modal').showModal();
     }
 

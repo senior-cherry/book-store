@@ -86,6 +86,7 @@ export default {
 
     const handleClick = async (itemId) => {
       await deleteCollection(itemId, "basket");
+      localStorage.removeItem("item" + itemId.toString() + user.toString());
     }
 
     if (!user) {
