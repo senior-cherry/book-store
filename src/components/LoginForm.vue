@@ -31,5 +31,7 @@ export default {
 </script>
 
 <style>
-
+.error {
+  text-align: center;
+}
 </style>
